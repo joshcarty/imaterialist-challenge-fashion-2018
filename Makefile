@@ -5,7 +5,7 @@ clean:
 	find . -name '*.pyo' -exec rm -f {} \;
 
 pull-data:
-	python src/data/make_dataset.py\
+	pipenv run python src/data/make_dataset.py\
 			--train data/train/train.json\
 			--validation data/validation/validation.json\
 			--test data/test/test.json\
