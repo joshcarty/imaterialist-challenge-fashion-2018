@@ -8,6 +8,7 @@ tqdm = "*"
 requests = "*"
 pillow = "!=5.1.0"
 numpy = "*"
+pandas = "*"
 
 [dev-packages]
 

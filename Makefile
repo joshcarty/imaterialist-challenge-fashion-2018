@@ -24,3 +24,7 @@ setup:
 	mv data/train.json data/train/train.json
 	mv data/validation.json data/validation/validation.json
 	mv data/test.json data/test/test.json
+
+make-csv:
+	pipenv run python src/data/make_csv.py --inpath data/train/train.json --outpath data/train/train.csv
+	pipenv run python src/data/make_csv.py --inpath data/validation/validation.json --outpath data/validation/validation.csv
