@@ -79,6 +79,11 @@ def load_urls(path):
         data = json.load(f)
 
     return data['images']
+
+
+def dispatch(iterable):
+    for _ in iterable:
+        pass
     
 
 def get_images(url_ids, dirpath, max_workers=100, n=None, skip_exists=True,
@@ -110,10 +115,9 @@ def get_images(url_ids, dirpath, max_workers=100, n=None, skip_exists=True,
                 futures.append(executor.submit(get_image, url, path))
 
         
-        for _ in tqdm(as_completed(futures), total=len(futures),
-                      unit='image', unit_scale=True, leave=True,
-                      desc=dirpath):
-            pass
+    dispatch(tqdm(as_completed(futures), total=len(futures),
+                  unit='image', unit_scale=True, leave=True,
+                  desc=dirpath))
 
 
 def make_dataset(dataset):
