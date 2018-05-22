@@ -86,8 +86,8 @@ def dispatch(iterable):
         pass
     
 
-def get_images(url_ids, dirpath, max_workers=100, n=None, skip_exists=True,
-               resize=256):
+def get_images(url_ids, dirpath, prefix=None, max_workers=100, n=None,
+               skip_exists=True, resize=256):
     """
     Gets images from list of dicts and outputs
     them to path.
@@ -107,7 +107,11 @@ def get_images(url_ids, dirpath, max_workers=100, n=None, skip_exists=True,
 
         for pair in url_ids:
             url = pair['url']
-            filename = '{}.jpg'.format(pair['imageId'])
+
+            if prefix:
+                filename = '{}_{}.jpg'.format(prefix, pair['imageId'])
+            else:
+                filename = '{}.jpg'.format(pair['imageId'])
 
             path = os.path.join(dirpath, filename)
 
@@ -160,11 +164,11 @@ def main():
 
     get_images(train, os.path.join(args.dataset, 'train'),
                max_workers=args.max_workers, n=args.max_images,
-               resize=args.resize, skip_exists=args.skip_exists)
+               resize=args.resize, skip_exists=args.skip_exists, prefix='train')
 
-    get_images(validation, os.path.join(args.dataset, 'validation'),
+    get_images(validation, os.path.join(args.dataset, 'train'),
                max_workers=args.max_workers, n=args.max_images,
-               resize=args.resize, skip_exists=args.skip_exists)
+               resize=args.resize, skip_exists=args.skip_exists, prefix='valid')
 
     get_images(test, os.path.join(args.dataset, 'test'),
                max_workers=args.max_workers, n=args.max_images,
