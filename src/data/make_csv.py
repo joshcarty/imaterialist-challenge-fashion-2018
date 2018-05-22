@@ -4,6 +4,8 @@ import os
 
 import pandas as pd
 
+from PIL import Image
+
 
 def load_json(path):
     with open(path, 'r') as f:
