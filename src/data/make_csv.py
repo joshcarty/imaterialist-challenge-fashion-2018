@@ -11,7 +11,7 @@ def load_json(path):
     return labels
 
 
-def load_filenames(path):
+def load_filenames(path, validate=True):
     files = os.listdir(path)
 
     if validate:
