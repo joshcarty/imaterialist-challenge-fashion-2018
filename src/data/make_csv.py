@@ -13,10 +13,29 @@ def load_json(path):
 
 def load_filenames(path):
     files = os.listdir(path)
-    files = [file.split('.')[0]
-             for file in files
+
+    if validate:
+        files = validate_images(files, path)
+
+    files = [file.split('.')[0] for file in files
              if file.endswith('.jpg')]
+
     return files
+
+
+def validate_images(files, path):
+    paths_files = [(os.path.join(path, file), file)
+                   for file in files]
+
+    valid_files = []
+    for path, file in paths_files:
+        try:
+            Image.open(path)
+            valid_files.append(file)
+        except OSError:
+            continue
+
+    return valid_files
 
 
 def create_dataframe(labels, dataset, prefix=None):
@@ -40,6 +59,7 @@ def parse_args():
     parser.add_argument('--train_json', required=True)
     parser.add_argument('--valid_json', required=True)
     parser.add_argument('--outpath', required=True)
+    parser.add_argument('--validate', default=True, type=bool)
     return parser.parse_args()
 
 
