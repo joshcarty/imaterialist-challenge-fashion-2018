@@ -23,7 +23,7 @@ def create_dataframe(labels, dataset, prefix=None):
     df = pd.DataFrame(labels)
 
     if prefix:
-        df['imageId'] = df['imageId'].apply(lambda f: 'valid_' + str(f))
+        df['imageId'] = df['imageId'].apply(lambda f: '{}_{}'.format(prefix, f))
 
     # Ensure file is downloaded
     files = load_filenames(dataset)
@@ -45,8 +45,10 @@ def parse_args():
 
 def main():
     args = parse_args()
+
     train_labels = load_json(args.train_json)
     valid_labels = load_json(args.valid_json)
+
     df_train = create_dataframe(train_labels, args.dataset, prefix='train')
     df_valid = create_dataframe(valid_labels, args.dataset, prefix='valid')
 
