@@ -108,3 +108,6 @@ data/*/*.json
 data/*/*.csv
 *.swp
 .DS_Store
+*.csv
+*.h5
+*.pkl

@@ -8,10 +8,9 @@ pull-data:
 	pipenv run python src/data/make_dataset.py\
 			--train data/train/train.json\
 			--validation data/validation/validation.json\
-			--test data/test/test.json\
+			--test data/test.json\
 			--dataset data\
-		   	--max_workers 10\
-			--max_images 1000\
+			--max_images 100000\
 			--resize 256
 
 setup:
@@ -25,7 +24,7 @@ setup:
 	mv data/validation.json data/validation/validation.json
 	mv data/test.json data/test/test.json
 
-make-csv:
+csv:
 	pipenv run python src/data/make_csv.py\
 		--train_json data/train/train.json\
 		--valid_json data/validation/validation.json\
